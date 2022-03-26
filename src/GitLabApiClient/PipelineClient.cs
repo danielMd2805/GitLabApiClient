@@ -47,6 +47,17 @@ namespace GitLabApiClient
             var url = _jobQueryBuilder.Build($"projects/{projectId}/pipelines/{pipelineId}/jobs", queryOptions);
             return await _httpFacade.GetPagedList<Job>(url);
         }
+        public async Task<IList<BridgeJob>> GetBridgesAsync(ProjectId projectId, int pipelineId) =>
+            await _httpFacade.Get<IList<BridgeJob>>($"projects/{projectId}/pipelines/{pipelineId}/bridges");
+
+        public async Task<IList<BridgeJob>> GetBridgesAsync(ProjectId projectId, int pipelineId, Action<JobQueryOptions> options = null)
+        {
+            var queryOptions = new JobQueryOptions();
+            options?.Invoke(queryOptions);
+
+            var url = _jobQueryBuilder.Build($"projects/{projectId}/pipelines/{pipelineId}/bridges", queryOptions);
+            return await _httpFacade.GetPagedList<BridgeJob>(url);
+        }
 
         public async Task<PipelineDetail> CreateAsync(ProjectId projectId, CreatePipelineRequest request) =>
             await _httpFacade.Post<PipelineDetail>($"projects/{projectId}/pipeline", request);

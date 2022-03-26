@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace GitLabApiClient.Models.Job.Responses
 {
-    public sealed class Job
+    public class Job
     {
         [JsonProperty("allow_failure")]
         public bool AllowFailure { get; set; }

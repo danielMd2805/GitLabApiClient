@@ -60,7 +60,9 @@ namespace GitLabApiClient
             var jobQueryBuilder = new JobQueryBuilder();
             var toDoListBuilder = new ToDoListQueryBuilder();
             var iterationsBuilder = new IterationsQueryBuilder();
+            var artifactsQueryBuilder = new ArtifactsQueryBuilder();
 
+            Artifacts = new ArtifactsClient(_httpFacade, artifactsQueryBuilder);
             Issues = new IssuesClient(_httpFacade, issuesQueryBuilder, projectIssueNotesQueryBuilder);
             Uploads = new UploadsClient(_httpFacade);
             MergeRequests = new MergeRequestsClient(_httpFacade, mergeRequestsQueryBuilder, projectMergeRequestsQueryBuilder, projectMergeRequestsNotesQueryBuilder);
@@ -81,6 +83,8 @@ namespace GitLabApiClient
             Iterations = new IterationsClient(_httpFacade, iterationsBuilder);
             Connection = new ConnectionClient(_httpFacade);
         }
+
+        public IArtifactsClient Artifacts { get; }
 
         /// <summary>
         /// Access GitLab's issues API.
